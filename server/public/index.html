@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirror Phone - PC Receiver</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="8" fill="url(#gradient1)"/>
+                    <path d="M20 10L28 18H22V28H18V18H12L20 10Z" fill="white"/>
+                    <defs>
+                        <linearGradient id="gradient1" x1="0" y1="0" x2="40" y2="40">
+                            <stop offset="0%" style="stop-color:#667eea"/>
+                            <stop offset="100%" style="stop-color:#764ba2"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Mirror Phone</h1>
+            </div>
+            <div class="status" id="status">
+                <span class="status-dot"></span>
+                <span class="status-text">Waiting for connection...</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- QR Code Section -->
+            <div class="qr-section" id="qrSection">
+                <div class="card qr-card">
+                    <div class="card-header">
+                        <h2>📱 Scan to Connect</h2>
+                        <p>Open the Mirror Phone app on your mobile device and scan this QR code</p>
+                    </div>
+                    <div class="qr-container">
+                        <div class="qr-placeholder" id="qrPlaceholder">
+                            <div class="loader"></div>
+                            <p>Generating QR Code...</p>
+                        </div>
+                        <img id="qrCode" class="qr-image" style="display: none;" alt="QR Code"/>
+                    </div>
+                    <div class="connection-info">
+                        <p class="info-label">Server URL:</p>
+                        <p class="info-value" id="serverUrl">-</p>
+                        <p class="info-label">Session ID:</p>
+                        <p class="info-value session-id" id="sessionId">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Section -->
+            <div class="video-section" id="videoSection" style="display: none;">
+                <div class="card video-card">
+                    <div class="video-container">
+                        <video id="remoteVideo" autoplay playsinline></video>
+                        <div class="video-overlay">
+                            <div class="video-controls">
+                                <button class="control-btn" id="disconnectBtn" title="Disconnect">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                    Disconnect
+                                </button>
+                                <button class="control-btn" id="fullscreenBtn" title="Fullscreen">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                                    </svg>
+                                    Fullscreen
+                                </button>
+                            </div>
+                            <div class="stream-info">
+                                <div class="stream-stat">
+                                    <span class="stat-label">Quality:</span>
+                                    <span class="stat-value" id="quality">HD</span>
+                                </div>
+                                <div class="stream-stat">
+                                    <span class="stat-label">Latency:</span>
+                                    <span class="stat-value" id="latency">~50ms</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Toast Notifications -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
